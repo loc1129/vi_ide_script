@@ -63,6 +63,7 @@ def add_target_dir():
 def parse_args():
 	if len(sys.argv) != 2:
 		print "Please specify the target\n"
+		sys.exit(-2)
 
 	global DepFileList
 	global Target
@@ -75,10 +76,14 @@ def parse_args():
 	elif sys.argv[1] == 'person':
 		Target = 'csf-person'
 		DepFileList = PersonManagerDepFileList
+	elif sys.argv[1] == 'androidab':
+		Target = 'android-recordsources'
 	else:
 		print "This target is currently not supported\n"
+		sys.exit(-2)
 		
-	add_dep_dir()
+	if DepFileList != '':
+		add_dep_dir()
 	add_target_dir()
 
 def add_dep_dir():
@@ -100,7 +105,6 @@ if __name__ == "__main__":
 	refresh()
 
 	parse_args()
-	print DirList
 	generate_index_file()
 
 	make_cscope()
