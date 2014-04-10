@@ -7,10 +7,10 @@ import ConfigParser
 import fileinput
 
 IndexFile = "mktags.files"
-FileTypeList = ['.cpp', '.c','.py','.sh','.h','.hpp']
+FileTypeList = ['.cpp', '.c','.py','.sh','.h','.hpp','.java']
 DirList = []
 RootDir = "/Users/loc/projectsource/jabbber_10_5_trunk"
-PrefixDirs = ['services', 'components', 'services', 'thirdparty/external', 'thirdparty/internal', 'tools']
+PrefixDirs = ['services', 'components', 'services', 'thirdparty/external', 'thirdparty/internal', 'tools', 'products']
 Target = ''
 DepFileList = ''
 ImpDepFileList = '/Users/loc/projectsource/github/vi_ide_script/imp_deps.txt'
@@ -78,6 +78,8 @@ def parse_args():
 		DepFileList = PersonManagerDepFileList
 	elif sys.argv[1] == 'androidab':
 		Target = 'android-recordsources'
+	elif sys.argv[1] == 'android':
+		Target = 'jabber-android'
 	else:
 		print "This target is currently not supported\n"
 		sys.exit(-2)
