@@ -16,6 +16,7 @@ DepFileList = ''
 ImpDepFileList = '/Users/loc/projectsource/github/vi_ide_script/imp_deps.txt'
 ContactServiceDepFileList = '/Users/loc/projectsource/github/vi_ide_script/contact_deps.txt'
 PersonManagerDepFileList = '/Users/loc/projectsource/github/vi_ide_script/person_deps.txt'
+JabberWerxDepFileList = '/Users/loc/projectsource/github/vi_ide_script/jabberwerx_deps.txt'
 
 
 def write_to_file(file, path):
@@ -76,13 +77,17 @@ def parse_args():
 	elif sys.argv[1] == 'person':
 		Target = 'csf-person'
 		DepFileList = PersonManagerDepFileList
+	elif sys.argv[1] == 'jabberwerx':
+		Target = 'jabberwerx'
+		DepFileList = JabberWerxDepFileList
 	elif sys.argv[1] == 'androidab':
 		Target = 'android-recordsources'
 	elif sys.argv[1] == 'android':
 		Target = 'jabber-android'
 	else:
-		print "This target is currently not supported\n"
-		sys.exit(-2)
+		Target = sys.argv[1]
+		#print "This target is currently not supported\n"
+		#sys.exit(-2)
 		
 	if DepFileList != '':
 		add_dep_dir()

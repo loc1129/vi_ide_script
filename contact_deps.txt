@@ -1,4 +1,4 @@
-cripts 
+scripts 
 jcfscripts 
 py7zip
 *gtest 
