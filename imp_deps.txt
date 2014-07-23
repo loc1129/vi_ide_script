@@ -52,6 +52,7 @@ helloworldservice
 csf-communicationhistory
 *windows-recordsources
 win-recordsources
+telemetryservice
 #--tests--
 contactservice
 conversationservice

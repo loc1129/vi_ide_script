@@ -9,7 +9,7 @@ import fileinput
 IndexFile = "mktags.files"
 FileTypeList = ['.cpp', '.c','.py','.sh','.h','.hpp','.java']
 DirList = []
-RootDir = "/Users/loc/projectsource/jabbber_10_5_trunk"
+RootDir = "/Users/loc/projectsource/jabber_10_5/trunk"
 PrefixDirs = ['services', 'components', 'services', 'thirdparty/external', 'thirdparty/internal', 'tools', 'products']
 Target = ''
 DepFileList = ''
@@ -27,13 +27,20 @@ def write_to_file(file, path):
 
 def make_cscope():
 	print "\nNow generating cscope database......"
-	cmd = "cscope -bkq -i " + IndexFile
+	if GenerateLocally:
+		print "local path: " + os.getcwd()
+		cmd = "cscope -Rbq"
+	else:
+		cmd = "cscope -bkq -i " + IndexFile
 	os.system(cmd)
 	print "Generate cscope database done!"
 
 def make_tags():
 	print "\nNow generating tags file......"	
-	cmd = "ctags --c++-kinds=+p --fields=+iaS --extra=+q -L " + IndexFile
+	if GenerateLocally:
+		cmd = "ctags --c++-kinds=+p --fields=+iaS --extra=+q -R " + os.getcwd()
+	else:
+		cmd = "ctags --c++-kinds=+p --fields=+iaS --extra=+q -L " + IndexFile
 	os.system(cmd)
 	print "Generate tags file done!"	
 
@@ -47,6 +54,8 @@ def refresh():
 	os.system(cmd)
 
 def generate_index_file():
+	if GenerateLocally:
+		return 0
 	fileobj = open(IndexFile, "w")
 	for path in DirList:
 		for dirpath, dirnames, filenames in os.walk(path):
@@ -55,6 +64,8 @@ def generate_index_file():
 	fileobj.close()
 
 def add_target_dir():
+	if GenerateLocally:
+		return 0
 	for prefixDir in PrefixDirs:
 		wholepath = os.path.join(RootDir, prefixDir)
 		targetDir = os.path.join(wholepath, Target)
@@ -68,6 +79,8 @@ def parse_args():
 
 	global DepFileList
 	global Target
+	global GenerateLocally 
+	GenerateLocally = 0
 	if sys.argv[1] == 'imp':
 		Target = 'impresenceservices'
 		DepFileList = ImpDepFileList
@@ -84,6 +97,8 @@ def parse_args():
 		Target = 'android-recordsources'
 	elif sys.argv[1] == 'android':
 		Target = 'jabber-android'
+	elif sys.argv[1] == 'local':
+		GenerateLocally = 1
 	else:
 		Target = sys.argv[1]
 		#print "This target is currently not supported\n"
@@ -96,6 +111,8 @@ def parse_args():
 def add_dep_dir():
 	global DepFileList
 	global Target
+	if GenerateLocally:
+		return 0
 	for line in fileinput.input(DepFileList):
 		if not line.strip():
 			continue
@@ -115,5 +132,5 @@ if __name__ == "__main__":
 	generate_index_file()
 
 	make_cscope()
-	make_tags()
+	#make_tags()
 
