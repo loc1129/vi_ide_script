@@ -1,0 +1,13 @@
+let searchengine google = "{google:baseURL}search?q=%s&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:bookmarkBarPinned}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}{google:omniboxStartMarginParameter}{google:contextualSearchVersion}ie={inputEncoding}"
+let searchengine baidu = "http://www.baidu.com/#ie={inputEncoding}&wd=%s"
+let searchengine bing = "http://www.bing.com/search?setmkt=zh-CN&q=%s"
+let searchengine diigo = "https://www.diigo.com/search?adSScope=my&what=%s&snapshot=no"
+let searchengine evernote = "http://www.evernote.com/search?q=%s"
+let searchengine yinxiang = "https://app.yinxiang.com/Home.action#st=p&x=%s"
+let completionengines = ["google", "baidu", "bing", "diigo", "evernote", "yinxiang"]
+let searchalias g = "google"
+let searchalias ba = "baidu"
+let searchalias bi = "bing"
+let searchalias d = "diigo"
+let searchalias e = "evernote"
+let searchalias yi = "yinxiang"
