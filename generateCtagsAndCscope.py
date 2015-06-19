@@ -9,6 +9,7 @@ import fileinput
 IndexFile = "mktags.files"
 FileTypeList = ['.cpp', '.c','.py','.sh','.h','.hpp','.java']
 DirList = []
+#RootDir = "/Users/loc/projectsource/aft_sc"
 RootDir = "/Users/loc/projectsource/jabber_10_5/trunk"
 PrefixDirs = ['services', 'components', 'services', 'thirdparty/external', 'thirdparty/internal', 'tools', 'products']
 Target = ''
