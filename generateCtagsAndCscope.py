@@ -9,15 +9,12 @@ import fileinput
 IndexFile = "mktags.files"
 FileTypeList = ['.cpp', '.c','.py','.sh','.h','.hpp','.java']
 DirList = []
-#RootDir = "/Users/loc/projectsource/aft_sc"
-RootDir = "/Users/loc/projectsource/jabber_10_5/trunk"
-PrefixDirs = ['services', 'components', 'services', 'thirdparty/external', 'thirdparty/internal', 'tools', 'products']
+RootDir = "/home/luocheng/tvosproject"
+#PrefixDirs = ['services', 'components', 'services', 'thirdparty/external', 'thirdparty/internal', 'tools', 'products']
+PrefixDirs = []
 Target = ''
 DepFileList = ''
-ImpDepFileList = '/Users/loc/projectsource/github/vi_ide_script/imp_deps.txt'
-ContactServiceDepFileList = '/Users/loc/projectsource/github/vi_ide_script/contact_deps.txt'
-PersonManagerDepFileList = '/Users/loc/projectsource/github/vi_ide_script/person_deps.txt'
-JabberWerxDepFileList = '/Users/loc/projectsource/github/vi_ide_script/jabberwerx_deps.txt'
+GamelauncherFileList = '/home/luocheng/mygit/vi_ide_script/Gamelauncher_deps.txt'
 
 
 def write_to_file(file, path):
@@ -67,6 +64,10 @@ def generate_index_file():
 def add_target_dir():
 	if GenerateLocally:
 		return 0
+        if not PrefixDirs:
+            targetDir = os.path.join(RootDir, Target)
+            if os.path.exists(targetDir):
+                DirList.append(targetDir)
 	for prefixDir in PrefixDirs:
 		wholepath = os.path.join(RootDir, prefixDir)
 		targetDir = os.path.join(wholepath, Target)
@@ -82,22 +83,9 @@ def parse_args():
 	global Target
 	global GenerateLocally 
 	GenerateLocally = 0
-	if sys.argv[1] == 'imp':
-		Target = 'impresenceservices'
-		DepFileList = ImpDepFileList
-	elif sys.argv[1] == 'contact':
-		Target = 'contactservice'
-		DepFileList = ContactServiceDepFileList
-	elif sys.argv[1] == 'person':
-		Target = 'csf-person'
-		DepFileList = PersonManagerDepFileList
-	elif sys.argv[1] == 'jabberwerx':
-		Target = 'jabberwerx'
-		DepFileList = JabberWerxDepFileList
-	elif sys.argv[1] == 'androidab':
-		Target = 'android-recordsources'
-	elif sys.argv[1] == 'android':
-		Target = 'jabber-android'
+	if sys.argv[1] == 'game':
+                Target = 'GameLauncher' 
+                DepFileList = GamelauncherFileList
 	elif sys.argv[1] == 'local':
 		GenerateLocally = 1
 	else:
@@ -118,6 +106,11 @@ def add_dep_dir():
 		if not line.strip():
 			continue
 		line = line[:-1]
+                if not PrefixDirs:
+                    depDir = os.path.join(RootDir, line)
+                    if os.path.exists(depDir):
+                        DirList.append(depDir)
+                    print depDir
 		for prefixDir in PrefixDirs:
 			wholepath = os.path.join(RootDir, prefixDir)
 			depDir = os.path.join(wholepath, line)
