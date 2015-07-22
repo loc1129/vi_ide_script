@@ -1,6 +1,6 @@
 set nu
-set ts=8
-set shiftwidth=8
+set ts=4
+set shiftwidth=4
 set noexpandtab
 set et
 syntax on
@@ -18,8 +18,13 @@ filetype plugin on
 "To Mac users out there: for mapping ALT+hjkl, use instead the real character
 "generated (find out which character using the combination while in INSERT
 "mode)
-vmap ç y:call system("pbcopy", getreg("\""))<CR>
-nmap √ :call setreg("\"",system("pbpaste"))<CR>p
+"vmap ç y:call system("pbcopy", getreg("\""))<CR>
+"nmap √ :call setreg("\"",system("pbpaste"))<CR>p
+
+nmap w= :resize +3<CR>
+nmap w- :resize -3<CR>
+nmap w, :vertical resize -3<CR>
+nmap w. :vertical resize +3<CR>
 
 " 状态栏
 set laststatus=2      " 总是显示状态栏
@@ -29,4 +34,5 @@ function! CurDir()
         let curdir = substitute(getcwd(), $HOME, "~","g")
         return curdir
 endfunction
-set statusline=[%n]\ %f%m%r%h\\|\\pwd:\ %{CurDir()}\\\|%=\|\ %l,%c\ %p%%\\|\ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\\|\\".&fenc)}\\|\ %{$USER}\ @\ %{hostname()}\
+"set statusline=[%n]\ %f%m%r%h\\|\\pwd:\ %{CurDir()}\\\|%=\|\ %l,%c\ %p%%\\|\ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\\|\\".&fenc)}\\|\ %{$USER}\ @\ %{hostname()}\
+set statusline=%l,%c\ %p%%\\|%{CurDir()}\\|%f%m%r%h
