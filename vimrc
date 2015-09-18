@@ -1,13 +1,17 @@
 set nu
 set ts=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 set et
 syntax on
 set showcmd
 set autoindent
 set hlsearch
 colorscheme desert
+
+set encoding=utf-8
+set fileencodings=utf-8,gb2312
+set termencoding=utf-8
 
 let Grep_Xargs_Options = '-0'
 
@@ -21,10 +25,10 @@ filetype plugin on
 "vmap ç y:call system("pbcopy", getreg("\""))<CR>
 "nmap √ :call setreg("\"",system("pbpaste"))<CR>p
 
-nmap w= :resize +3<CR>
-nmap w- :resize -3<CR>
-nmap w, :vertical resize -3<CR>
-nmap w. :vertical resize +3<CR>
+"nmap w= :resize +3<CR><ESC>
+"nmap w- :resize -3<CR>
+"nmap w, :vertical resize -3<CR>
+"nmap w. :vertical resize +3<CR>
 
 " 状态栏
 set laststatus=2      " 总是显示状态栏
