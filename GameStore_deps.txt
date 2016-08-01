@@ -1,0 +1,3 @@
+tvosuilibs
+cocos2d-x
+framework

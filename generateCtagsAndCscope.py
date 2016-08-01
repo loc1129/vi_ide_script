@@ -14,7 +14,9 @@ RootDir = "/home/luocheng/tvosproject"
 PrefixDirs = []
 Target = ''
 DepFileList = ''
-GamelauncherFileList = '/home/luocheng/mygit/vi_ide_script/Gamelauncher_deps.txt'
+GameStoreFileList = '/home/luocheng/mygit/vi_ide_script/GameStore_deps.txt'
+EnjoyCenterFileList = '/home/luocheng/mygit/vi_ide_script/EnjoyCenter_deps.txt'
+TestFileList = '/home/luocheng/mygit/vi_ide_script/Test_deps.txt'
 
 
 def write_to_file(file, path):
@@ -25,11 +27,12 @@ def write_to_file(file, path):
 
 def make_cscope():
 	print "\nNow generating cscope database......"
-	if GenerateLocally:
-		print "local path: " + os.getcwd()
-		cmd = "cscope -Rbq"
-	else:
-		cmd = "cscope -bkq -i " + IndexFile
+        cmd = "cscope -bkqR -i " + IndexFile
+	#if GenerateLocally:
+		#print "local path: " + os.getcwd()
+		#cmd = "cscope -Rbq"
+	#else:
+		#cmd = "cscope -bkqR -i " + IndexFile
 	os.system(cmd)
 	print "Generate cscope database done!"
 
@@ -52,8 +55,8 @@ def refresh():
 	os.system(cmd)
 
 def generate_index_file():
-	if GenerateLocally:
-		return 0
+	#if GenerateLocally:
+		#return 0
 	fileobj = open(IndexFile, "w")
 	for path in DirList:
 		for dirpath, dirnames, filenames in os.walk(path):
@@ -83,9 +86,15 @@ def parse_args():
 	global Target
 	global GenerateLocally 
 	GenerateLocally = 0
-	if sys.argv[1] == 'game':
-                Target = 'GameLauncher' 
-                DepFileList = GamelauncherFileList
+        if sys.argv[1] == 'gamestore':
+                Target = 'GameStore'
+                DepFileList = GameStoreFileList
+        elif sys.argv[1] == 'enjoy':
+                Target = 'EnjoyCenter'
+                DepFileList = EnjoyCenterFileList
+        elif sys.argv[1] == 'ui':
+                Target = 'tvosuilibs'
+                DepFileList = TestFileList
 	elif sys.argv[1] == 'local':
 		GenerateLocally = 1
 	else:
@@ -95,7 +104,14 @@ def parse_args():
 		
 	if DepFileList != '':
 		add_dep_dir()
+        if GenerateLocally:
+                add_local_dir()
 	add_target_dir()
+
+def add_local_dir():
+        if not GenerateLocally:
+                return 0;
+        DirList.append(os.getcwd());
 
 def add_dep_dir():
 	global DepFileList
@@ -126,5 +142,5 @@ if __name__ == "__main__":
 	generate_index_file()
 
 	make_cscope()
-	#make_tags()
+	make_tags()
 
