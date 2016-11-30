@@ -1,3 +1,2 @@
-tvosuilibs
-cocos2d-x
-framework
+k1/tvosuilibs
+k1/cocos2d-x

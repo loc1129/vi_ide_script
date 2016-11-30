@@ -15,7 +15,7 @@ PrefixDirs = []
 Target = ''
 DepFileList = ''
 GameStoreFileList = '/home/luocheng/mygit/vi_ide_script/GameStore_deps.txt'
-EnjoyCenterFileList = '/home/luocheng/mygit/vi_ide_script/EnjoyCenter_deps.txt'
+qiyiFileList = '/home/luocheng/mygit/vi_ide_script/QiyiPlay_GameStore_deps.txt'
 TestFileList = '/home/luocheng/mygit/vi_ide_script/Test_deps.txt'
 
 
@@ -86,14 +86,14 @@ def parse_args():
 	global Target
 	global GenerateLocally 
 	GenerateLocally = 0
-        if sys.argv[1] == 'gamestore':
-                Target = 'GameStore'
+        if sys.argv[1] == 'gs':
+                Target = 'k1/GameStore/GameStore'
                 DepFileList = GameStoreFileList
-        elif sys.argv[1] == 'enjoy':
-                Target = 'EnjoyCenter'
-                DepFileList = EnjoyCenterFileList
+        elif sys.argv[1] == 'qiyigs':
+                Target = 'qiyiplaycode/GameStore/GameStore'
+                DepFileList = qiyiFileList
         elif sys.argv[1] == 'ui':
-                Target = 'tvosuilibs'
+                Target = 'k1/tvosuilibs'
                 DepFileList = TestFileList
 	elif sys.argv[1] == 'local':
 		GenerateLocally = 1

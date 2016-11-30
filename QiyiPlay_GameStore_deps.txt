@@ -1,0 +1,2 @@
+qiyiplaycode/tvosuilibs
+qiyiplaycode/cocos2d-x
