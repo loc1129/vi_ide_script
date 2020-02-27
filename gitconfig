@@ -1,9 +1,8 @@
 [alias]
-        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-        df = diff
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(blue)%cn%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+        df = difftool
         st = status
         ck = checkout
-
 [diff]
 	tool = diffmerge
 [difftool "diffmerge"]
@@ -13,3 +12,5 @@
 [mergetool "diffmerge"]
 	trustExitCode = true
 	cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+[difftool]
+	prompt = false
